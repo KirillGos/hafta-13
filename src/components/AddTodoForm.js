@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../redux/todoSlice';
 const AddTodoForm = () => {
 	const [value, setValue] = useState('');
-
+	const vekilFonksiyon = useDispatch();
+		
 	const onSubmit = (event) => {
 		event.preventDefault();
-		console.log('user entered: ' + value);
+		if ( value ) {
+			vekilFonksiyon( addTodo({title: value}) )
+		}
 	};
 
 	return (
