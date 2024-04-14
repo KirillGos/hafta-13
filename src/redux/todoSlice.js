@@ -1,27 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export const todoSlice = createSlice({
-    name: 'todos',
-    initialState: [
-        {id: 1, title: 'todo1', completed: false},
-        {id: 2, title: 'todo2', completed: false},
-        {id: 3, title: 'todo3', completed: false},
-        {id: 4, title: 'todo4', completed: false},
-        {id: 5, title: 'todo5', completed: false},
-        {id: 6, title: 'todo6', completed: false},
-        {id: 7, title: 'todo7', completed: false}
-    ],
-    reducers: {
-        addTodo: (state, action) => {
-            const todo = {
-                id: new Date(),
-                title: action.payload.title,
-                completed: false,
-            }
-            state.push(todo);
-        }
-    }
-})
+	name: 'todos',
+	initialState: [
+		{ id: 1, title: 'Elma al', completed: false },
+		{ id: 2, title: 'Muz al', completed: false },
+		{ id: 3, title: 'Süt al', completed: true },
+		{ id: 4, title: 'Yumurta al', completed: false },
+		{ id: 5, title: 'Ekmek al', completed: false },
+	],
+    
+	reducers: {
+		addTodo: (state, action) => {
+			const todo = {
+				id: new Date(),
+				title: action.payload.title,
+				completed: false,
+			};
+			state.push(todo);
+		},
 
-export const { addTodo} = todoSlice.actions;
+		tamamlandiAcKapa: (state, action) => {
+			const index = state.findIndex((todo) => todo.id === action.payload.id);
+			state[index].completed = action.payload.completed;
+		},
+        isiSil: (state, action ) => {
+            return state.filter((todo) => todo.id !== action.payload.id);
+        }
+	},
+});
+
+export const { addTodo, tamamlandiAcKapa, isiSil } = todoSlice.actions;
 export default todoSlice.reducer;

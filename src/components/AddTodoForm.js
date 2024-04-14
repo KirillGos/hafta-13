@@ -4,14 +4,14 @@ import { addTodo } from '../redux/todoSlice';
 const AddTodoForm = () => {
 	const [value, setValue] = useState('');
 	const vekilFonksiyon = useDispatch();
-		
+	
 	const onSubmit = (event) => {
 		event.preventDefault();
 		if ( value ) {
 			vekilFonksiyon( addTodo({title: value}) )
+			setValue('')
 		}
 	};
-
 	return (
 		<form onSubmit={onSubmit} className='form-inline mt-3 mb-3'>
 			<label className='sr-only'>Name</label>
@@ -25,7 +25,7 @@ const AddTodoForm = () => {
 
 			<button type='submit' className='btn btn-primary mb-2'>
 				Submit
-			</button>
+			</button> 
 		</form>
 	);
 };
