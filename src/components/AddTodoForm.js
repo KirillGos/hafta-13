@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../redux/todoSlice';
+
 const AddTodoForm = () => {
 	const [value, setValue] = useState('');
 	const vekilFonksiyon = useDispatch();
@@ -12,6 +13,16 @@ const AddTodoForm = () => {
 			setValue('')
 		}
 	};
+	const todoArray = useSelector(state => state.todos);
+
+	function sirala() {
+		document.querySelector('.list-group').innerHTML = ''
+		 todoArray.toSorted((a, b) =>
+		a.title.localeCompare(b.title)).map((item)=> {
+			vekilFonksiyon(addTodo({title: item.title}))
+		})
+	}
+	
 	return (
 		<form onSubmit={onSubmit} className='form-inline mt-3 mb-3'>
 			<label className='sr-only'>Name</label>
@@ -24,8 +35,9 @@ const AddTodoForm = () => {
 			></input>
 
 			<button type='submit' className='btn btn-primary mb-2'>
-				Submit
+				Ekle
 			</button> 
+			<button onClick={() => console.log(sirala())}>Sırala</button>
 		</form>
 	);
 };

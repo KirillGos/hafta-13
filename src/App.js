@@ -11,7 +11,7 @@ import { deleteLastTodo } from "./redux/undoSlice";
 const App = () => {
 
 	const vekilFonksiyon = useDispatch();
-	const undosArray = useSelector(state => state.undos)
+	const undosArray = useSelector(state => state.todos)
 
 	function geriAl() {
 		/* const sonSilinenIs = undosArray[undosArray.length - 1]; */
