@@ -1,16 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { isiSil, tamamlandiAcKapa } from '../redux/todoSlice';
+import { saveTodo } from '../redux/undoSlice';
 
 const TodoItem = ({ id, title, completed }) => {
 	const vekilFonksiyon = useDispatch()
 
 	function tamamlandiIslem() {
-		vekilFonksiyon( tamamlandiAcKapa({id:id, completed: !completed}) )
+		vekilFonksiyon( tamamlandiAcKapa({id, completed: !completed}) )
 	}
 
 	function isiSilIslemi() {
-		vekilFonksiyon(isiSil({id: id}))
+		vekilFonksiyon(saveTodo({title, id, completed}))
+		vekilFonksiyon(isiSil({id: id}));
 	}	
 
 

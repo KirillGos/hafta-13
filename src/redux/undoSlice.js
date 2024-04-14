@@ -7,14 +7,16 @@ export const undoSlice = createSlice({
 	reducers: {
 		saveTodo: (state, action) => {
 			const todo = {
-				id: new Date(),
 				title: action.payload.title,
 				completed: action.payload.completed
 			}
 			state.push(todo);
-		}	
+		}, 
+		deleteLastTodo: (state, action) => {
+			state.pop()
+		}
 	},
 });
 
-export const { saveTodo  } = undoSlice.actions;
+export const { saveTodo , deleteLastTodo } = undoSlice.actions;
 export default undoSlice.reducer;
